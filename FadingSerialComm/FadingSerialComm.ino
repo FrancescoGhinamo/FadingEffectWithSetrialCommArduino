@@ -1,9 +1,22 @@
+
+const int analogOut = 11;
+const int sensorIn = A0;
+
 void setup() {
-  // put your setup code here, to run once:
+  pinMode(analogOut, OUTPUT);
+  pinMode(sensorIn, INPUT);
+
+  Serial.begin(9600);
 
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  int readValue = analogRead(sensorIn);
+  int parsedValue = map(readValue, 0, 1023, 0, 255);
+  parsedValue = constrain(parsedValue, 0, 255);
+  Serial.println(parsedValue);
+
+  analogWrite(analogOut, parsedValue);
+  delay(1);
 
 }
